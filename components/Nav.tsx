@@ -1,14 +1,16 @@
 import options from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import {  HomeIcon } from "lucide-react";
+
 
 const Nav = async () => {
   const session = await getServerSession(options);
   //console.log(session);
   return (
-    <header className="bg-gray-600 text-gray-100">
+    <header className="bg-black text-white">
       <nav className="flex justify-between items-center w-full px-10 py-4">
-        <div>My Site</div>
+      <div><HomeIcon/></div>
         <div className="flex gap-10">
           <Link href="/">Home</Link>
           {session?.user.role == "ADMIN" && (

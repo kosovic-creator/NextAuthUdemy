@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
-  h1 {
-    @apply font-bold text-3xl;
+  html {
+    font-size: 14px;
   }
-  a {
-    @apply underline font-bold;
+  body {
+    @apply dark:bg-black dark:text-white;
   }
 }
