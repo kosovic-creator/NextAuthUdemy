@@ -22,6 +22,7 @@ const Nav = async () => {
           {session ? (
             <>
               <p>{session.user.name}</p>
+              <p>{session.user.email}</p>
               <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
             </>
           ) : (

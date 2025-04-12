@@ -12,8 +12,8 @@ export async function createUserAction(
     const name = formData.get("name") as string;
     const username = formData.get("username") as string;
     let password = formData.get("password") as string;
-
-    if (!name || !username || !password) {
+    const email = formData.get("email") as string;
+    if (!name || !username || !password || !email) {
       return { message: "All fields are required" };
     }
 
@@ -33,7 +33,7 @@ export async function createUserAction(
 
     password = await bcrypt.hash(password, 10);
 
-    await db.user.create({ data: { name, username, password } });
+    await db.user.create({ data: { name, username,email, password } });
   } catch (err: unknown) {
     return {
       message: "Unknown Error Occured!",
