@@ -13,4 +13,4 @@ export default withAuth(function middleware(req) {
   }
 });
 
-export const config = { matcher: ["/CreateUser"] };
+export const config = { matcher: ["/CreateUser", "/product"] };
