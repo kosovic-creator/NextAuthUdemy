@@ -1,80 +1,104 @@
-
-
-
 'use client';
-import { updateProduct } from "@/actions/product.actions";
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useParams } from 'next/navigation';
-export const fetchCache = 'force-no-store';
-// export const revalidate = 0;
+import { updateProduct, getProductById } from "@/actions/product.actions";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
+export const fetchCache = "force-no-store";
 
-export default function Page() {
-  const [productName, setProductName] = useState('');
-  const [productPrice, setProductPrice] = useState('');
+export default function UpdateProductPage() {
+  const { id } = useParams();
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
 
-  const router = useRouter();
-  const { id } = useParams(); // Dohvatanje ID-a iz URL-a
+  // Fetch current product data
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!id) return;
+
+      try {
+        const product = await getProductById(Number(id));
+        if (product) {
+          setName(product.name);
+          setPrice(product.price.toString());
+        } else {
+          setMessage("Product not found.");
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        setMessage("Failed to fetch product details.");
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setMessage('');
+    setMessage("");
 
     try {
       if (!id) {
-        setMessage('Product ID is missing.');
+        setMessage("Product ID is missing.");
         return;
       }
 
       const updatedProduct = await updateProduct(Number(id), {
-        name: productName,
-        price: parseFloat(productPrice),
+        name,
+        price: parseFloat(price),
       });
 
-      setMessage('Product updated successfully!');
-      router.push('/product'); // Preusmeravanje nakon uspešnog ažuriranja
+      setMessage("Product updated successfully!");
+      console.log("Updated Product:", updatedProduct);
     } catch (error) {
-      setMessage('Failed to update product.');
+      setMessage("Failed to update product.");
+      console.error("Error updating product:", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-
     <div>
-      <h1>Update Product</h1>
-      <form onSubmit={handleUpdate}>
+      <h1 className="text-3xl font-bold underline">Update Product</h1>
+      <form onSubmit={handleUpdate} className="flex flex-col gap-4 mt-4">
         <div>
-          <label htmlFor="name">Product Name:</label>
+          <label htmlFor="name" className="block font-medium">
+            Product Name:
+          </label>
           <input
             type="text"
             id="name"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="border border-gray-300 rounded px-2 py-1 w-full"
             required
           />
         </div>
         <div>
-          <label htmlFor="price">Product Price:</label>
+          <label htmlFor="price" className="block font-medium">
+            Product Price:
+          </label>
           <input
             type="number"
             id="price"
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="border border-gray-300 rounded px-2 py-1 w-full"
             required
           />
         </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Updating...' : 'Update Product'}
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          {loading ? "Updating..." : "Update Product"}
         </button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="mt-4">{message}</p>}
     </div>
   );
 }
-

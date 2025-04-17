@@ -10,15 +10,16 @@ const Nav = async () => {
   return (
     <header className="bg-black text-white">
       <nav className="flex justify-between items-center w-full px-10 py-4">
-      <div><HomeIcon/></div>
+      <Link href="/"><HomeIcon/></Link>
         <div className="flex gap-10">
-          <Link href="/">Home</Link>
+
+
           {session?.user.role == "ADMIN" && (
             <Link href="/CreateUser">Create User</Link>
           )}
-          <Link href="/ClientMember">Client Member</Link>
+          {/* <Link href="/ClientMember">Client Member</Link>
           <Link href="/Member">Member</Link>
-          <Link href="/Public">Public</Link>
+          <Link href="/Public">Public</Link> */}
           <Link href="/product">Product</Link>
           {session ? (
             <>
