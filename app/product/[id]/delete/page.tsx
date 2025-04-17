@@ -16,9 +16,14 @@ export default async function page({ params }: PageProps) {
   }
     return (
       <>
-        <h1>Delete Product</h1>
-        <p>Product with ID {id} has been deleted.</p>
-        <Link href="/product">Go back to product list</Link>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-3xl font-bold mb-6">Delete Product</h1>
+        <form className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
+          <p>Product with ID {id} has been deleted.</p>
+          <Link href="/product">Go back to product list</Link>
+        </form>
+      </div>
+
 
       </>
     );
