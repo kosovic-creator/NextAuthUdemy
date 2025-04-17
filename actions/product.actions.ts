@@ -36,30 +36,30 @@ export async function productsAll() {
 //   }
 // }
 
-// export async function updateProduct(id: number, data: { name?: string; price?: number }) {
-//   try {
-//     return await prisma.product.update({
-//       where: { id },
-//       data,
-//     });
-//   } catch (error) {
-//     console.error("Error updating product:", error);
-//     throw error;
-//   }
-// }
+export async function updateProduct(id: number, data: { name?: string; price?: number }) {
+  try {
+    return await prisma.product.update({
+      where: { id },
+      data,
+    });
+  } catch (error) {
+    console.error("Error updating product:", error);
+    throw error;
+  }
+}
 
-// export async function deleteProduct(id: number) {
-//   try {
-//     return await prisma.product.delete({
-//       where: { id },
-//     }
-//   );
+export async function deleteProduct(id: number) {
+  try {
+    return await db.product.delete({
+      where: { id },
+    }
+  );
 
-//   } catch (error) {
-//     console.error("Error deleting product:", error);
-//     throw error;
-//   }
-// }
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    throw error;
+  }
+}
 export async function createProduct(data: { name: string; price: number }) {
   try {
     return await db.product.create({
