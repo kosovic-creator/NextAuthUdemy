@@ -38,7 +38,7 @@ export async function productsAll() {
 
 export async function updateProduct(id: number, data: { name?: string; price?: number }) {
   try {
-    return await prisma.product.update({
+    return await db.product.update({
       where: { id },
       data,
     });
