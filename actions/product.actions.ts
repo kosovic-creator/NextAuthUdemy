@@ -70,16 +70,16 @@ export async function createProduct(data: { name: string; price: number }) {
     throw error;
   }
 }
-// export async function getProductById(id: number) {
-//   try {
-//     return await prisma.product.findUnique({
-//       where: { id },
-//     });
-//   } catch (error) {
-//     console.error("Error fetching product by ID:", error);
-//     throw error;
-//   }
-// }
+export async function getProductById(id: number) {
+  try {
+    return await db.product.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error fetching product by ID:", error);
+    throw error;
+  }
+}
 // export async function deleteProductById(id: number) {
 //   try {
 //     return await prisma.product.delete({
