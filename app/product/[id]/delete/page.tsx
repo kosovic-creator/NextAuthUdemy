@@ -1,6 +1,8 @@
 import { deleteProduct } from "@/actions/product.actions";
+import ToastHandler from "@/components/ToastHandler";
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+// import { toast } from "@/components/hooks/use-toast";
 export const fetchCache = 'force-no-store';
 
 interface PageProps {
@@ -14,6 +16,11 @@ export default async function page({ params }: PageProps) {
   if (!prod) {
     notFound();
   }
+  // toast({
+  //   title: "Product Deleted",
+  //   description: `Product with ID ${id} has been successfully deleted.`,
+  // });
+  <ToastHandler message={`Product with ID ${id} has been successfully deleted.`} />
     return (
       <>
       <div className="flex flex-col items-center justify-center min-h-screen">

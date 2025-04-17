@@ -17,9 +17,9 @@ const Nav = async () => {
           {session?.user.role == "ADMIN" && (
             <Link href="/CreateUser">Create User</Link>
           )}
-          {/* <Link href="/ClientMember">Client Member</Link>
+          <Link href="/ClientMember">Client Member</Link>
           <Link href="/Member">Member</Link>
-          <Link href="/Public">Public</Link> */}
+          <Link href="/Public">Public</Link>
           <Link href="/product">Product</Link>
           {session ? (
             <>
