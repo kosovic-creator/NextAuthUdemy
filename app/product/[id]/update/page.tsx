@@ -1,7 +1,7 @@
 'use client';
 import { updateProduct, getProductById } from "@/actions/product.actions";
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export const fetchCache = "force-no-store";
 
@@ -11,6 +11,7 @@ export default function UpdateProductPage() {
   const [price, setPrice] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
   // Fetch current product data
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function UpdateProductPage() {
         if (product) {
           setName(product.name);
           setPrice(product.price.toString());
+
         } else {
           setMessage("Product not found.");
         }
@@ -32,7 +34,7 @@ export default function UpdateProductPage() {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, router]);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +53,7 @@ export default function UpdateProductPage() {
       });
 
       setMessage("Product updated successfully!");
+      router.push(`/product/`);
       console.log("Updated Product:", updatedProduct);
     } catch (error) {
       setMessage("Failed to update product.");

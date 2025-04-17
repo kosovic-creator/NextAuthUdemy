@@ -4,8 +4,8 @@
 import { useState } from 'react';
 import { createProduct } from "@/actions/product.actions";
 import { useRouter } from 'next/navigation';
-// import { z } from 'zod';
-// import productSchema from '@/types';
+import { z } from 'zod';
+import productSchema from '@/types';
 
 
 
@@ -18,15 +18,15 @@ export default function NewProductPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // const productSchema = z.object({
-    //   name: z.string().min(4, 'Product name is required'),
-    //   price: z
-    //     .string()
-    //     .regex(/^\d+(\.\d{1,2})?$/, 'Price must be a valid number with up to 2 decimal places'),
-    // });
-    // try {
-    //   // Validirajte unos pomoću Zod šeme
-    //   productSchema.parse({ name, price });
+    const productSchema = z.object({
+      name: z.string().min(4, 'Product name is required'),
+      price: z
+        .string()
+        .regex(/^\d+(\.\d{1,2})?$/, 'Price must be a valid number with up to 2 decimal places'),
+    });
+    try {
+      // Validirajte unos pomoću Zod šeme
+      productSchema.parse({ name, price });
 
       const priceNumber = parseFloat(price);
 
@@ -35,15 +35,15 @@ export default function NewProductPage() {
       setMessage('Product created successfully!');
 
       router.push(`/product/`);
-    // } catch (error) {
-    //   if (error instanceof z.ZodError) {
-    //     // Prikazivanje grešaka validacije
-    //     setMessage(error.errors[0].message);
-    //   } else {
-    //     console.error('Error creating product:', error);
-    //     setMessage('Failed to create product.');
-    //   }
-    // }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        // Prikazivanje grešaka validacije
+        setMessage(error.errors[0].message);
+      } else {
+        console.error('Error creating product:', error);
+        setMessage('Failed to create product.');
+      }
+    }
   };
 
   return (
