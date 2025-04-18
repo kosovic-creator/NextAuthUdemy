@@ -92,4 +92,16 @@ export async function getProductByName(name: string) {
     throw error;
   }
 }
+export async function getProductByNameOrprice(name: string, price: number) {
+  try {
+    return await db.product.findFirst({
+      where: {
+       OR: [{ name: name }, { price: price }]
 
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching product by name and price:", error);
+    throw error;
+  }
+}
