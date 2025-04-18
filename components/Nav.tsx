@@ -21,6 +21,7 @@ const Nav = async () => {
           <Link href="/Member">Member</Link>
           <Link href="/Public">Public</Link>
           <Link href="/product">Product</Link>
+          <Link href="/product/search">Search</Link>
           {session ? (
             <>
               <p>{session.user.name}</p>
