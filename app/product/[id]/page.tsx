@@ -1,11 +1,11 @@
 import { getProductById } from "@/actions/product.actions";
 
 interface PageProps {
-  params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  const { id } = params;
+  const { id } =await params;
 
   try {
     const product = await getProductById(Number(id));
