@@ -15,7 +15,7 @@ export default async function page({ params }: PageProps) {
   if (!prod) {
     notFound();
   }
- 
+
   <ToastHandler message={`Product with ID ${id} has been successfully deleted.`} />
     return (
       <>
@@ -23,7 +23,7 @@ export default async function page({ params }: PageProps) {
         <h1 className="text-3xl font-bold mb-6">Delete Product</h1>
         <form className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
           <p>Product with ID {id} has been deleted.</p>
-          <Link href="/product">Go back to product list</Link>
+          <Link href="/product"  className="text-blue-800 underline">Go back to product list</Link>
         </form>
       </div>
 

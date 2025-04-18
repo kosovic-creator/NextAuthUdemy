@@ -4,13 +4,13 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 export const fetchCache = 'force-no-store';
 
-export default async function  page() {
+export default async function  Product() {
 
   const products = await productsAll();
 
-//  if (!products || products.length === 0) {
-//     redirect('/product');
-//   }
+ if (!products || products.length === 0) {
+    redirect('/product');
+  }
 return (
 
       <div className="flex flex-col items-center justify-center min-h-screen">
