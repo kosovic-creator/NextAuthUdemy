@@ -3,7 +3,7 @@ import { z } from "zod";
 
   const productSchema = z.object({
     name: z.string().min(3, "Artikal mora imati najmanje 3 karaktera"),
-    price: z.number().positive("Ciena mora biti pozitivan brojj"),
+    //price: z.number().max(4, "Ciena mora imatinajviše 4 cifre"),
 
     });
     type Product = z.infer<typeof productSchema>;
@@ -16,7 +16,7 @@ import { z } from "zod";
 
 
 
-  
+
 
 
 

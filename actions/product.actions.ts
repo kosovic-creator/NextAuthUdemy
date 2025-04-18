@@ -80,14 +80,13 @@ export async function getProductById(id: number) {
     throw error;
   }
 }
-// export async function deleteProductById(id: number) {
-//   try {
-//     return await prisma.product.delete({
-//       where: { id },
-//     });
-//   } catch (error) {
-//     console.error("Error deleting product by ID:", error);
-//     throw error;
-//   }
-// }
-
+export async function getProductByName(name: string) {
+  try {
+    return await db.product.findFirst({
+      where: { name },
+    });
+  } catch (error) {
+    console.error("Error fetching product by name:", error);
+    throw error;
+  }
+}

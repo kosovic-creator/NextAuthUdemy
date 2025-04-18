@@ -7,31 +7,27 @@ import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import productSchema from '@/types';
 
-
-
-
 export default function NewProductPage() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const productSchema = z.object({
-      name: z.string().min(4, 'Product name is required'),
-      price: z
-        .string()
-        .regex(/^\d+(\.\d{1,2})?$/, 'Price must be a valid number with up to 2 decimal places'),
-    });
+    // const productSchema = z.object({
+    //   name: z.string().min(4, 'Product name is required'),
+    //   price: z
+    //     .string()
+    //     .regex(/^\d+(\.\d{1,2})?$/, 'Price must be a valid number with up to 2 decimal places'),
+    // });
     try {
       // Validirajte unos pomoću Zod šeme
-      productSchema.parse({ name, price });
+      productSchema.parse({ name });
 
       const priceNumber = parseFloat(price);
 
       await createProduct({ name, price: priceNumber });
-      // <ToastHandler message="Uspjesno" />
+
       setMessage('Product created successfully!');
 
       router.push(`/product/`);
