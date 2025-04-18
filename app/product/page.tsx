@@ -2,6 +2,7 @@ import React from 'react';
 import { productsAll } from  "@/actions/product.actions";
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+export const fetchCache = 'force-no-store';
 
 export default async function  page() {
 
