@@ -36,6 +36,18 @@ export async function productsAll() {
 //   }
 // }
 
+export async function createProduct(data: { name: string; price: number }) {
+  try {
+    return await db.product.create({
+      data,
+    });
+  } catch (error) {
+    console.error("Error creating product:", error);
+    throw error;
+  }
+}
+
+
 export async function updateProduct(id: number, data: { name?: string; price?: number }) {
   try {
     return await db.product.update({
@@ -60,16 +72,6 @@ export async function deleteProduct(id: number) {
     throw error;
   }
 }
-export async function createProduct(data: { name: string; price: number }) {
-  try {
-    return await db.product.create({
-      data,
-    });
-  } catch (error) {
-    console.error("Error creating product:", error);
-    throw error;
-  }
-}
 export async function getProductById(id: number) {
   try {
     return await db.product.findUnique({
@@ -90,3 +92,4 @@ export async function getProductByName(name: string) {
     throw error;
   }
 }
+

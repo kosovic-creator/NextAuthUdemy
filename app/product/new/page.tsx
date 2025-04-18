@@ -22,7 +22,7 @@ export default function NewProductPage() {
     // });
     try {
       // Validirajte unos pomoću Zod šeme
-      productSchema.parse({ name });
+      productSchema.parse({ name, price });
 
       const priceNumber = parseFloat(price);
 

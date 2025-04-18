@@ -3,9 +3,11 @@ import { z } from "zod";
 
   const productSchema = z.object({
     name: z.string().min(3, "Artikal mora imati najmanje 3 karaktera"),
-    //price: z.number().max(4, "Ciena mora imatinajviše 4 cifre"),
-
+       price: z
+        .string()
+        .regex(/^\d+(\.\d{1,2})?$/, 'Cijena mora biti validan broj sa do 2 decimalne tačke'),
     });
+
     type Product = z.infer<typeof productSchema>;
   export default productSchema; ;
 
